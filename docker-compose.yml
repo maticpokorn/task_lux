@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  app:
+    depends_on:
+      db:
+        condition: service_healthy
+    build: ./app/
+    ports:
+      - "8080:8080"
+  db:
+    build: ./database/
+    image: db
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5

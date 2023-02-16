@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS flats (locality varchar(2000), name varchar(2000), image varchar(2000));
